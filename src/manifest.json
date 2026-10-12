@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Parcia Plugin",
+  "version": "0.1.0",
+  "description": "Escanea creadores de TikTok e Instagram con tu cuenta de Parcia.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvkfIwLcTBjZsmbyNk1gVTsut4gg+zCT6BbITmeE0Vb5egpv3FPq5OF7TZ92dcTQ4iaCWxf2gpi0moQHrdGWm2Y3UAH9Yy5BuCuBs0FW5m6+KF90p1AYwAgTxXaqN6KP8q3fvtJXkCKPKG9QiEZjy2A3gh4rIwrdGFTp++CoiR/hfmfoQNv/Vap/U8SeL2jNgyXST5RLn3Fv/haeu/XqyBfa7gr/VxYIgtDUkwonQu73D8U5b8yesXZrQU7KCL1HLa+0S4rqKpCptKtXif3KYWkdXIZGdRfzJGMCfDV4+qCDh19nnsfLGPEE5xmnl8af5yTdV8GecseN09WTfj3LZ0wIDAQAB",
+  "permissions": ["storage", "sidePanel"],
+  "web_accessible_resources": [
+    {
+      "resources": ["auth/callback.html"],
+      "matches": ["http://127.0.0.1:8000/*", "http://localhost:8000/*"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Abrir Parcia Plugin",
+    "default_icon": "icons/icon.png"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "icons": {
+    "128": "icons/icon.png"
+  }
+}
