@@ -1,0 +1,64 @@
+/* Temporary styles until the new plugin design arrives. */
+:root {
+  --text: #2f2f35;
+  --muted: #7c7c86;
+  --border: #eaeaea;
+  --bg: #f6f6f7;
+  --primary: #5b69e2;
+  --primary-hover: #4a58d0;
+  --danger: #dc2626;
+}
+
+* { box-sizing: border-box; }
+
+/* Chrome sets the side panel width (the user can drag it); fill it. */
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 16px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+[hidden] { display: none !important; }
+
+.header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.logo { height: 20px; }
+.brand { font-weight: 700; }
+
+.view { display: flex; flex-direction: column; gap: 12px; }
+.title { margin: 0; font-size: 18px; }
+.muted { margin: 0; color: var(--muted); }
+.small { font-size: 12px; }
+.strong { font-weight: 600; }
+.name { margin: 0; font-weight: 600; }
+.error { margin: 0; color: var(--danger); font-size: 12px; }
+
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 10px 12px; border-radius: 10px;
+  font: inherit; font-weight: 500; cursor: pointer;
+}
+.btn:disabled { opacity: .6; cursor: default; }
+.btn-primary { border: 1px solid var(--border); background: #fff; color: var(--text); }
+.btn-primary:hover:not(:disabled) { background: var(--bg); }
+.btn-ghost { border: 1px solid var(--border); background: transparent; color: var(--danger); }
+.google { width: 18px; height: 18px; }
+
+.card {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: #fff;
+}
+.row { display: flex; justify-content: space-between; align-items: baseline; }
+
+.bar { height: 6px; border-radius: 3px; background: var(--bg); overflow: hidden; }
+.bar-fill { height: 100%; width: 0; background: var(--primary); transition: width .3s; }
+
+.modules { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.modules li { padding: 2px 8px; border-radius: 999px; background: var(--bg); font-size: 12px; }
+
+.actions { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.link { color: var(--primary); font-size: 13px; text-decoration: none; }
+.link:hover { text-decoration: underline; }

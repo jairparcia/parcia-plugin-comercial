@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Parcia Plugin</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header class="header">
+    <img src="../icons/icon.png" alt="" class="logo">
+    <span class="brand">Parcia Plugin</span>
+  </header>
+
+  <!-- Loading -->
+  <section id="view-loading" class="view">
+    <p class="muted">Cargando…</p>
+  </section>
+
+  <!-- Signed out -->
+  <section id="view-signed-out" class="view" hidden>
+    <h1 class="title">Inicia sesión</h1>
+    <p class="muted">Conecta el plugin con tu cuenta de Parcia para empezar a escanear creadores.</p>
+    <button id="btn-sign-in" class="btn btn-primary" type="button">
+      <svg class="google" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.95 10.95 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/>
+      </svg>
+      Iniciar sesión con Google
+    </button>
+    <p id="sign-in-hint" class="muted small" hidden>Continúa en la pestaña que se abrió. Al conectar, este panel se actualiza solo.</p>
+    <p id="sign-in-error" class="error" hidden></p>
+  </section>
+
+  <!-- Signed in -->
+  <section id="view-signed-in" class="view" hidden>
+    <div class="card account">
+      <p class="muted small">Estás en la cuenta de</p>
+      <p id="user-name" class="name"></p>
+      <p id="user-email" class="muted small"></p>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <span class="muted small">Plan</span>
+        <span id="plan-name" class="strong"></span>
+      </div>
+      <div class="row">
+        <span class="muted small">Escaneos este mes</span>
+        <span id="quota-label" class="strong"></span>
+      </div>
+      <div class="bar"><div id="quota-bar" class="bar-fill"></div></div>
+      <p id="quota-resets" class="muted small"></p>
+    </div>
+
+    <div class="card">
+      <p class="muted small">Plataformas incluidas en tu plan</p>
+      <ul id="modules" class="modules"></ul>
+    </div>
+
+    <div class="actions">
+      <a id="link-portal" class="link" target="_blank" rel="noopener">Abrir mi portal</a>
+      <button id="btn-sign-out" class="btn btn-ghost" type="button">Cerrar sesión</button>
+    </div>
+  </section>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

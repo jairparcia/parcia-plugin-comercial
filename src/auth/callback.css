@@ -1,0 +1,25 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #2f2f35;
+  background: #f6f6f7;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 40px;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.logo { height: 28px; }
+.status { margin: 0; font-size: 15px; text-align: center; }
+.status.error { color: #dc2626; }
