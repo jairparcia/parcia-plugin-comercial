@@ -35,6 +35,31 @@
 
   <!-- Signed in -->
   <section id="view-signed-in" class="view" hidden>
+    <!-- Scanner: follows the active tab (TikTok / Instagram profile or post) -->
+    <div id="scan" class="card scan">
+      <p id="scan-message" class="muted small"></p>
+
+      <div id="scan-result" hidden>
+        <div class="creator">
+          <img id="scan-avatar" class="avatar" alt="" referrerpolicy="no-referrer" hidden>
+          <div class="creator-text">
+            <p id="scan-title" class="name"></p>
+            <p id="scan-subtitle" class="muted small"></p>
+          </div>
+        </div>
+        <dl id="scan-stats" class="stats"></dl>
+        <p id="scan-description" class="muted small description collapsed" hidden></p>
+        <button id="btn-description-toggle" class="link-button" type="button" hidden>Ver más</button>
+      </div>
+
+      <p id="scan-status" class="small" hidden></p>
+
+      <div class="scan-actions">
+        <button id="btn-rescan" class="btn btn-secondary" type="button" hidden>Volver a escanear</button>
+        <a id="link-upgrade" class="link" target="_blank" rel="noopener" hidden>Ver planes</a>
+      </div>
+    </div>
+
     <div class="card account">
       <p class="muted small">Estás en la cuenta de</p>
       <p id="user-name" class="name"></p>

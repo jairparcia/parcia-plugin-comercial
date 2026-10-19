@@ -1,8 +1,8 @@
 # Parcia Plugin (commercial)
 
 Chrome extension (Manifest V3) that connects to **parcia-control-comercial**.
-This is the new plugin, built from scratch. For now it only covers sign-in;
-scanning arrives with the MVP design.
+This is the new plugin, built from scratch: sign-in plus the TikTok/Instagram
+scanner. Styles are temporary until the MVP design arrives.
 
 ## Structure
 
@@ -14,11 +14,44 @@ src/
 ├── lib/
 │   ├── auth.js       Sign-in in a new tab (PKCE), sign-out, account.
 │   ├── api.js        fetch wrapper with the bearer token.
-│   └── session.js    Token storage (chrome.storage.local).
-├── sidepanel/        Side panel UI (signed out / signed in).
+│   ├── session.js    Token storage (chrome.storage.local).
+│   ├── pages.js      Which URLs are scannable (TikTok/Instagram profile or post).
+│   └── scanner.js    Injects the scrapers into the tab and sends the scan to the API.
+├── content/          tiktok-interceptor.js: keeps TikTok API video JSON in the page (world MAIN).
+├── scrapers/         Run inside the TikTok/Instagram tab (isolated world):
+│                     common.js helpers + tiktok.js / instagram.js.
+├── sidepanel/        Side panel UI: sign-in, account, scanner card (scan-view.js).
 ├── auth/             Sign-in callback page (end of the sign-in tab).
 └── icons/
 ```
+
+## Scanner
+
+- Works while the side panel is open and the user is signed in. Navigating with
+  the panel closed scans nothing.
+- On a TikTok or Instagram **profile** (`/@handle`, `/handle/`) or **post**
+  (`/@handle/video/<id>`, `/p/<code>`, `/reel/<code>`), the panel injects
+  `scrapers/common.js` + the platform scraper, reads the page and sends the
+  result to `POST /api/ingest/creator` or `/api/ingest/publication`.
+- The API decides: the plan's module for the platform (403) and the monthly
+  quota of the account (402). A creator/post already scanned this month is a
+  free re-scan (`counted: false`). The panel only shows the data once the API
+  accepted the scan, and updates the quota from the response.
+- Each scraper only returns data tied to the handle / id in the URL (TikTok and
+  Instagram are SPAs: right after navigating, the DOM may still show the
+  previous page). It retries for a few seconds and, as a last resort, refetches
+  the page's server-rendered HTML.
+- **TikTok videos opened as an overlay** (from a profile, For You or search)
+  change the URL but keep the previous page's HTML, so their metrics only
+  exist in the JSON TikTok's web app fetched. `content/tiktok-interceptor.js`
+  (content script, world MAIN, `document_start`) keeps every video-shaped
+  object from any TikTok `/api/` response in a page-memory map (max 1000, no
+  storage, nothing leaves the page). The scanner reads it by the video id in
+  the URL; hydration / refetching the page are the fallback. After installing
+  or reloading the extension, reload open TikTok tabs so the interceptor runs.
+- Results are cached per page for the panel session; "Volver a escanear"
+  forces a new scan.
+- Modash is not scanned yet.
 
 ## Sign-in flow
 
